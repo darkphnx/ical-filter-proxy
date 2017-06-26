@@ -14,8 +14,6 @@ module IcalFilterProxy
     def match_event?(event)
       event_data = data_for(field, event)
 
-      puts "#{event_data} #{val} #{operator}"
-
       case operator
       when 'equals'
         event_data == val
