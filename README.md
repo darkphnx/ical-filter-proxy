@@ -34,4 +34,7 @@ bundle install
 bundle exec rackup -p 8000
 ```
 
+Voila! Your calendar will now be available at http://localhost:8000/my_calendar_name?key=myapikey.
+
+
 I'd recommend running it behind something like nginx, but you can do what you like.
