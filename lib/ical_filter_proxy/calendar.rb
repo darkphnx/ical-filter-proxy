@@ -1,11 +1,15 @@
 module IcalFilterProxy
   class Calendar
-    attr_accessor :name, :ical_url, :filter_rules
+    attr_accessor :ical_url, :timezone, :filter_rules
 
-    def initialize(name, ical_url, filter_rules = [])
-      self.name = name
+    def initialize(ical_url, timezone = 'UTC')
       self.ical_url = ical_url
-      self.filter_rules = filter_rules
+      self.timezone = timezone
+      self.filter_rules = []
+    end
+
+    def add_rule(field, operator, value)
+      self.filter_rules << FilterRule.new(self, field, operator, value)
     end
 
     def filtered_calendar

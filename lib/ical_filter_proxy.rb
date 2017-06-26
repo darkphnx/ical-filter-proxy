@@ -17,9 +17,12 @@ module IcalFilterProxy
 
     filters = Hash.new({})
     config.each do |filter_name, filter_config|
-      rules = filter_config["rules"].map { |rule| FilterRule.new(rule["field"], rule["operator"], rule["val"]) }
-      filters[filter_name][:calendar] = Calendar.new(filter_name, filter_config["ical_url"], rules)
+      calendar = Calendar.new(filter_config["ical_url"], filter_config["timezone"])
+      filter_config["rules"].each do |rule|
+        calendar.add_rule(rule["field"], rule["operator"], rule["val"])
+      end
 
+      filters[filter_name][:calendar] = calendar
       filters[filter_name][:api_key] = filter_config["api_key"]
     end
 
