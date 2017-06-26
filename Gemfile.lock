@@ -1,0 +1,15 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    icalendar (2.4.1)
+    rack (2.0.1)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  icalendar
+  rack
+
+BUNDLED WITH
+   1.14.6

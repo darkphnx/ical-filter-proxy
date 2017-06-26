@@ -1,0 +1,4 @@
+rota:
+  ical_url: https://url-to-calendar.ical
+  api_key: abc12
+  rules: []
