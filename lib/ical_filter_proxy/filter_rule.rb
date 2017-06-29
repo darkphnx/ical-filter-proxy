@@ -1,6 +1,5 @@
 module IcalFilterProxy
   class FilterRule
-    TIME_FORMAT = "%H:%M".freeze
 
     attr_accessor :calendar, :field, :operator, :val
 
@@ -11,8 +10,8 @@ module IcalFilterProxy
       self.val = val
     end
 
-    def match_event?(event)
-      event_data = data_for(field, event)
+    def match_event?(filterable_event)
+      event_data = filterable_event.send(field.to_sym)
 
       case operator
       when 'equals'
@@ -25,15 +24,6 @@ module IcalFilterProxy
     end
 
     private
-
-    def data_for(field, event)
-      case field
-      when 'start_time'
-        event.dtstart.in_time_zone(timezone).strftime(TIME_FORMAT)
-      when 'end_time'
-        event.dtend.in_time_zone(timezone).strftime(TIME_FORMAT)
-      end
-    end
 
     def timezone
       calendar.timezone

@@ -8,6 +8,7 @@ require 'yaml'
 
 require_relative 'ical_filter_proxy/calendar'
 require_relative 'ical_filter_proxy/filter_rule'
+require_relative 'ical_filter_proxy/filterable_event_adapter'
 require_relative 'ical_filter_proxy/web_app'
 
 module IcalFilterProxy

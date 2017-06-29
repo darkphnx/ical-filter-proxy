@@ -14,13 +14,19 @@ module IcalFilterProxy
 
     def filtered_calendar
       filtered_calendar = Icalendar::Calendar.new
-      original_ics.events.select { |e| filter_match?(e) }.each do |original_event|
+      filtered_events.each do |original_event|
         filtered_calendar.add_event(original_event)
       end
       filtered_calendar.to_ical
     end
 
     private
+
+    def filtered_events
+      original_ics.events.select do |e|
+        filter_match?(FilterableEventAdapter.new(e))
+      end
+    end
 
     def filter_match?(event)
       filter_rules.empty? || filter_rules.all? { |rule| rule.match_event?(event) }
