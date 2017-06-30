@@ -32,22 +32,6 @@ module IcalFilterProxy
       def date
         @date ||= timestamp.strftime(DATE_FORMAT)
       end
-
-      def year
-        @year ||= timestamp.strftime('%Y')
-      end
-
-      def month
-        @month ||= timestamp.strftime('%m')
-      end
-
-      def day
-        @month ||= timestamp.strftime('%d')
-      end
-
-      def dow
-        @dow ||= timestamp.strftime('%u')
-      end
     end
 
     # @private We need to use send from method_missing to obtain this, so we can't use private, but this isn't for you
