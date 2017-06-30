@@ -61,4 +61,30 @@ RSpec.describe IcalFilterProxy::FilterableEventAdapter do
       expect(adapter.end_time).to eq(expected_time)
     end
   end
+
+  describe '#start_date' do
+    it 'translates dtstart into a date only' do
+      adapter = described_class.new(test_event)
+      expect(adapter.start_date).to eq("1987-02-21")
+    end
+
+    it 'uses the timezone specified in the options hash' do
+      tz = 'Europe/Moscow'
+      adapter = described_class.new(test_event, timezone: tz)
+      expect(adapter.start_date).to eq('1987-02-21')
+    end
+  end
+
+  describe '#end_date' do
+    it 'translates dtend into a date only' do
+      adapter = described_class.new(test_event)
+      expect(adapter.end_date).to eq("2017-06-29")
+    end
+
+    it 'uses the timezone specified in the options hash' do
+      tz = 'Europe/Moscow'
+      adapter = described_class.new(test_event, timezone: tz)
+      expect(adapter.end_date).to eq('2017-06-30')
+    end
+  end
 end
