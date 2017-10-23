@@ -20,6 +20,8 @@ module IcalFilterProxy
         event_data != val
       when 'startswith'
         event_data.start_with?(val)
+      when 'not-startswith'
+        !event_data.start_with?(val)
       else
         false
       end
