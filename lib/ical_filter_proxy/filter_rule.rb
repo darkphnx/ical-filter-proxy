@@ -17,6 +17,10 @@ module IcalFilterProxy
         event_data == value
       when 'not-equals'
         event_data != value
+      when 'startswith'
+        event_data.start_with?(value)
+      when 'not-startswith'
+        !event_data.start_with?(value)
       else
         false
       end
