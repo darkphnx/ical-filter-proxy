@@ -9,7 +9,7 @@ module IcalFilterProxy
     end
 
     def add_rule(field, operator, value)
-      self.filter_rules << FilterRule.new(self, field, operator, value)
+      self.filter_rules << FilterRule.new(field, operator, value)
     end
 
     def filtered_calendar
@@ -24,7 +24,7 @@ module IcalFilterProxy
 
     def filtered_events
       original_ics.events.select do |e|
-        filter_match?(FilterableEventAdapter.new(e))
+        filter_match?(FilterableEventAdapter.new(e, timezone: timezone))
       end
     end
 
