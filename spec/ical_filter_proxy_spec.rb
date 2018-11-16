@@ -14,8 +14,8 @@ RSpec.describe IcalFilterProxy do
       expect(web_app.filters['rota']).to have_key(:calendar)
     end
 
-    it "sets up a filters hash that defaults to empty hash" do
-      expect(web_app.filters['foo']).to eq({})
+    it "sets up a filters hash that defaults to nil" do
+      expect(web_app.filters['foo']).to be_nil
     end
   end
 end
