@@ -13,10 +13,7 @@ require_relative 'ical_filter_proxy/web_app'
 
 module IcalFilterProxy
   def self.start
-    config_file_path = File.expand_path('../../config.yml', __FILE__)
-    config = YAML.load(open(config_file_path))
-
-    filters = Hash.new({})
+    filters = Hash.new { |hash, key| hash[key] = {} }
     config.each do |filter_name, filter_config|
       calendar = Calendar.new(filter_config["ical_url"], filter_config["timezone"])
       filter_config["rules"].each do |rule|
@@ -28,5 +25,10 @@ module IcalFilterProxy
     end
 
     WebApp.new(filters)
+  end
+
+  def self.config
+    config_file_path = File.expand_path('../../config.yml', __FILE__)
+    config = YAML.load(open(config_file_path))
   end
 end
