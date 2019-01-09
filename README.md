@@ -1,5 +1,7 @@
 # ical-filter-proxy
 
+[![Build Status](https://travis-ci.org/darkphnx/ical-filter-proxy.svg?branch=master)](https://travis-ci.org/darkphnx/ical-filter-proxy)
+
 Got an iCal feed full of nonsense that you don't need? Does your calendar client have piss-poor
 filtering options (looking at your Google Calendar)?
 

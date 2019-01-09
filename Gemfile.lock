@@ -18,6 +18,7 @@ GEM
     minitest (5.10.2)
     public_suffix (2.0.5)
     rack (2.0.1)
+    rake (12.3.2)
     rspec (3.8.0)
       rspec-core (~> 3.8.0)
       rspec-expectations (~> 3.8.0)
@@ -47,6 +48,7 @@ DEPENDENCIES
   activesupport
   icalendar
   rack
+  rake
   rspec
   webmock
 
