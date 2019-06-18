@@ -2,11 +2,22 @@ require 'spec_helper'
 
 RSpec.describe IcalFilterProxy::FilterRule do
   describe '.new' do
-    it 'accepts field, operatior and value' do
+    it 'accepts field, operator and value' do
       filter_rule = described_class.new('start_time', 'equals', '09:00')
 
       expect(filter_rule).to be_a(described_class)
       expect(filter_rule.field).to eq('start_time')
+      expect(filter_rule.negation).to eq(false)
+      expect(filter_rule.operator).to eq('equals')
+      expect(filter_rule.value).to eq('09:00')
+    end
+
+    it 'accepts field, negative operator and value' do
+      filter_rule = described_class.new('start_time', 'not-equals', '09:00')
+
+      expect(filter_rule).to be_a(described_class)
+      expect(filter_rule.field).to eq('start_time')
+      expect(filter_rule.negation).to eq(true)
       expect(filter_rule.operator).to eq('equals')
       expect(filter_rule.value).to eq('09:00')
     end
