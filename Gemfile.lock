@@ -18,7 +18,7 @@ GEM
     minitest (5.10.2)
     public_suffix (2.0.5)
     rack (2.0.1)
-    rake (12.3.2)
+    rake (12.3.3)
     rspec (3.8.0)
       rspec-core (~> 3.8.0)
       rspec-expectations (~> 3.8.0)
@@ -32,6 +32,8 @@ GEM
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.8.0)
     rspec-support (3.8.0)
+    rspec_junit_formatter (0.4.1)
+      rspec-core (>= 2, < 4, != 2.12.0)
     safe_yaml (1.0.4)
     thread_safe (0.3.6)
     tzinfo (1.2.3)
@@ -50,6 +52,7 @@ DEPENDENCIES
   rack
   rake
   rspec
+  rspec_junit_formatter
   webmock
 
 BUNDLED WITH
