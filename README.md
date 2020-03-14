@@ -19,6 +19,11 @@ my_calendar_name:
       - field: start_time # start_time and end_time supported
         operator: not-equals # equals and not-equals supported
         val: "09:00" # A time in 24hour format, zero-padded
+      - field: summary # summary and description supported
+        operator: startswith # startswith and not-startswith supported
+        val: # array of values also supported
+          - Planning
+          - Daily Standup
 ```
 
 ## Additional Rules
