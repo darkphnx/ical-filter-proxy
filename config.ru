@@ -1,3 +1,4 @@
+require 'rack'
 require_relative 'lib/ical_filter_proxy'
 require_relative 'lib/ical_filter_proxy/servers/rack_app'
 
