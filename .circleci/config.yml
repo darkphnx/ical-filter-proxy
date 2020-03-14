@@ -20,4 +20,4 @@ jobs:
           command: bundle exec rspec --out /tmp/test-results/rspec.xml --format progress
 
       - store_test_results:
-          path: /tmp/test_results
+          path: /tmp/test-results
