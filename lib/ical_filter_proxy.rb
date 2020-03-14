@@ -9,13 +9,8 @@ require 'yaml'
 require_relative 'ical_filter_proxy/calendar'
 require_relative 'ical_filter_proxy/filter_rule'
 require_relative 'ical_filter_proxy/filterable_event_adapter'
-require_relative 'ical_filter_proxy/rack_app'
 
 module IcalFilterProxy
-  def self.start_rack_app
-    RackApp.new(filters)
-  end
-
   def self.filters
     config.each_with_object({}) do |(filter_name, filter_config), filters|
       calendar = Calendar.new(filter_config["ical_url"], filter_config["api_key"], filter_config["timezone"])

@@ -1,23 +1,6 @@
 require 'spec_helper'
 
 RSpec.describe IcalFilterProxy do
-  describe '.start_rack_app' do
-    let(:rack_app) { IcalFilterProxy.start_rack_app }
-    let(:filters) do
-      {
-        'rota' => instance_double(IcalFilterProxy::Calendar)
-      }
-    end
-
-    before do
-      expect(IcalFilterProxy).to receive(:filters).and_return filters
-    end
-
-    it "initializes a RackApp with filters from config" do
-      expect(rack_app.filters).to eq(filters)
-    end
-  end
-
   describe '.config_file_path' do
     it { expect(described_class.config_file_path).to eq(File.expand_path('../config.yml', __dir__)) }
   end
