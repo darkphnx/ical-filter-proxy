@@ -5,32 +5,30 @@ require 'rack'
 require 'open-uri'
 require 'icalendar'
 require 'yaml'
+require 'forwardable'
 
 require_relative 'ical_filter_proxy/calendar'
 require_relative 'ical_filter_proxy/filter_rule'
 require_relative 'ical_filter_proxy/filterable_event_adapter'
-require_relative 'ical_filter_proxy/web_app'
 
 module IcalFilterProxy
-  def self.start
-    filters = {}
-    config.each do |filter_name, filter_config|
-      calendar = Calendar.new(filter_config["ical_url"], filter_config["timezone"])
+  def self.filters
+    config.each_with_object({}) do |(filter_name, filter_config), filters|
+      calendar = Calendar.new(filter_config["ical_url"], filter_config["api_key"], filter_config["timezone"])
+
       filter_config["rules"].each do |rule|
         calendar.add_rule(rule["field"], rule["operator"], rule["val"])
       end
 
-      filters[filter_name] = {
-        calendar: calendar,
-        api_key: filter_config["api_key"]
-      }
+      filters[filter_name] = calendar
     end
-
-    WebApp.new(filters)
   end
 
   def self.config
-    config_file_path = File.expand_path('../../config.yml', __FILE__)
-    config = YAML.load(open(config_file_path))
+    YAML.safe_load(File.read(config_file_path))
+  end
+
+  def self.config_file_path
+    File.expand_path('../config.yml', __dir__)
   end
 end

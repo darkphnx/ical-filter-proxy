@@ -3,5 +3,5 @@ rota:
   api_key: abc12
   rules:
     - field: start_time
-      operator: not-equals
-      val: 09:00
+      operator: equals
+      val: '09:00'

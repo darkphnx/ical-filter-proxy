@@ -1,8 +1,9 @@
 source 'https://rubygems.org'
 
-gem 'icalendar'
-gem 'rack'
 gem 'activesupport' # Used for it's handy timezone support
+gem 'icalendar'
+gem 'rake'
+gem 'rack', require: false
 
 gem 'rspec', require: false
 gem 'rspec_junit_formatter', require: false

@@ -54,3 +54,21 @@ Create a `config.yml` as shown above.
 docker build -t ical-filter-proxy .
 docker run -d --name ical-filter-proxy -v $(pwd)/config.yml:/app/config.yml -p 8000:8000 ical-filter-proxy
 ```
+
+### Lambda
+
+ical-filter-proxy can be run as an AWS Lambda process using their API Gateway.
+
+Create a new API Gateway in the AWS Console and link to to a new Lambda process. This should create all of the permissions required in AWS land.
+
+Next we need to package the app up ready for Lambda. First of all, craft your config.yml and place it in the root of the source directory. A handy rake task is included which will fetch any dependencies and zip them up ready to be uploaded.
+
+```
+bundle exec rake lamba:build
+```
+
+This task will output the file `ical-filter-proxy.zip`. Note that you must have the `zip` utility installed locally to use this task.
+
+When prompted during the Lambda setup, provide this zip file and set the handler to `lambda.handle`.
+
+That's it! Your calendar should now be available at `https://aws-api-gateway-host/default/gateway_name?calendar=my_calendar_name&key=my_api_key`
