@@ -1,4 +1,5 @@
 require 'rspec'
+require 'rspec_junit_formatter'
 require 'webmock/rspec'
 require 'ical_filter_proxy'
 
