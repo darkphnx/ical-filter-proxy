@@ -18,16 +18,13 @@ module IcalFilterProxy
 
   def self.filters
     config.each_with_object({}) do |(filter_name, filter_config), filters|
-      calendar = Calendar.new(filter_config["ical_url"], filter_config["timezone"])
+      calendar = Calendar.new(filter_config["ical_url"], filter_config["api_key"], filter_config["timezone"])
 
       filter_config["rules"].each do |rule|
         calendar.add_rule(rule["field"], rule["operator"], rule["val"])
       end
 
-      filters[filter_name] = {
-        calendar: calendar,
-        api_key: filter_config["api_key"]
-      }
+      filters[filter_name] = calendar
     end
   end
 

@@ -2,22 +2,25 @@ require 'spec_helper'
 
 RSpec.describe IcalFilterProxy::Calendar do
   let(:url) { 'http://example.com/ical.ics' }
-  let(:cal) { described_class.new(url) }
+  let(:api_key) { 'abc123' }
+  let(:cal) { described_class.new(url, api_key) }
 
   describe '.new' do
     it 'accepts a URL as its first arg' do
-      cal = described_class.new(url)
-
       expect(cal.ical_url).to eq(url)
+    end
+
+    it 'accepts an API key as it\'s second arg' do
+      expect(cal.api_key).to eq(api_key)
     end
 
     it 'sets UTC as the default timezone' do
       expect(cal.timezone).to eq('UTC')
     end
 
-    it 'optionally accepts a timezone as its second arg' do
+    it 'optionally accepts a timezone as its third arg' do
       tz = 'Europe/London'
-      cal = described_class.new(url, tz)
+      cal = described_class.new(url, api_key, tz)
 
       expect(cal.timezone).to eq(tz)
     end

@@ -13,20 +13,14 @@ module IcalFilterProxy
       ical_filter = filters[requested_filter]
 
       if ical_filter
-        if request.params['key'] == ical_filter[:api_key]
-          [200, {'Content-Type' => 'text/calendar'}, [ical_filter[:calendar].filtered_calendar]]
+        if request.params['key'] == ical_filter.api_key
+          [200, { 'Content-Type' => 'text/calendar' }, [ical_filter.filtered_calendar]]
         else
-          [403, {'Content-Type' => 'text/plain'}, ['Authentication Incorrect']]
+          [403, { 'Content-Type' => 'text/plain' }, ['Authentication Incorrect']]
         end
       else
-        [404, {'Content-Type' => 'text/plain'}, ['Calendar not found']]
+        [404, { 'Content-Type' => 'text/plain' }, ['Calendar not found']]
       end
-    end
-
-    private
-
-    def find_filter(filter_name)
-      filters.find { |filter| filter.name == filter_name }
     end
   end
 end

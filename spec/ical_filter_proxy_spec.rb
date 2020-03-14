@@ -5,10 +5,7 @@ RSpec.describe IcalFilterProxy do
     let(:rack_app) { IcalFilterProxy.start_rack_app }
     let(:filters) do
       {
-        'rota' => {
-          calendar: instance_double(IcalFilterProxy::Calendar),
-          api_key: 'my_api_key'
-        }
+        'rota' => instance_double(IcalFilterProxy::Calendar)
       }
     end
 
@@ -50,18 +47,20 @@ RSpec.describe IcalFilterProxy do
       expect(filters).to have_key('rota')
     end
 
-    it 'contains the API key for each calendar' do
-      expect(filters['rota']).to have_key(:api_key)
-      expect(filters['rota'][:api_key]).to eq('abc12')
+    it 'creates a Calenar object for each entry' do
+      expect(filters['rota']).to be_a(IcalFilterProxy::Calendar)
     end
 
-    it 'creates a Calenar object for each calendar' do
-      expect(filters['rota']).to have_key(:calendar)
-      expect(filters['rota'][:calendar]).to be_a(IcalFilterProxy::Calendar)
+    it 'adds ical_url to the Calendar object' do
+      expect(filters['rota'].ical_url).to eq('https://url-to-calendar.ical')
+    end
+
+    it 'adds api_key to the Calenar object' do
+      expect(filters['rota'].api_key).to eq('abc12')
     end
 
     it 'adds filters to the Calendar object' do
-      filter_rule = filters['rota'][:calendar].filter_rules.first
+      filter_rule = filters['rota'].filter_rules.first
 
       expect(filter_rule).to be_a(IcalFilterProxy::FilterRule)
       expect(filter_rule.field).to eq('start_time')

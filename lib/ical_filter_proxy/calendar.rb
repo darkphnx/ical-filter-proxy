@@ -1,10 +1,12 @@
 module IcalFilterProxy
   class Calendar
-    attr_accessor :ical_url, :timezone, :filter_rules
+    attr_accessor :ical_url, :api_key, :timezone, :filter_rules
 
-    def initialize(ical_url, timezone = 'UTC')
+    def initialize(ical_url, api_key, timezone = 'UTC')
       self.ical_url = ical_url
+      self.api_key = api_key
       self.timezone = timezone
+
       self.filter_rules = []
     end
 
