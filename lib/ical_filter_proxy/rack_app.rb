@@ -1,5 +1,5 @@
 module IcalFilterProxy
-  class WebApp
+  class RackApp
     attr_accessor :filters
 
     def initialize(filters)
