@@ -32,7 +32,10 @@ module IcalFilterProxy
   end
 
   def self.config
-    config_file_path = File.expand_path('../config.yml', __dir__)
     YAML.safe_load(File.read(config_file_path))
+  end
+
+  def self.config_file_path
+    File.expand_path('../config.yml', __dir__)
   end
 end
