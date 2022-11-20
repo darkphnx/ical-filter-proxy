@@ -19,7 +19,7 @@ module IcalFilterProxy
 
       filter_config["rules"].each do |rule|
         calendar.add_rule(rule["field"], rule["operator"], rule["val"])
-      end
+      end unless filter_config["rules"].nil?
 
       filter_config["map"].each do |mapping|
         rules = []
@@ -29,7 +29,7 @@ module IcalFilterProxy
         end
 
         calendar.add_mapping(mapping["field"], rules, mapping["val"])
-      end
+      end unless filter_config["map"].nil?
 
       filters[filter_name] = calendar
     end
