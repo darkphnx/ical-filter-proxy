@@ -24,6 +24,19 @@ my_calendar_name:
         val: # array of values also supported
           - Planning
           - Daily Standup
+   map:
+      - field: summary
+        rules:
+          - field: summary
+            operator: equals
+            val: Busy
+        val: A Meeting
+      - field: summary
+        rules:
+          - field: summary
+            operator: equals
+            val: Tentative
+        val: A Tentative Meeting
 ```
 
 ## Additional Rules
@@ -31,6 +44,10 @@ my_calendar_name:
 At the moment rules are pretty simple, supporting only start times, end times, equals and
 not-equals as that satisfies my use case. To add support for additional rules please extend
 `lib/ical_filter_proxy/filter_rule.rb`. Pull requests welcome.
+
+## Mappings
+
+Fields can be remapped by supplying a set of rules, the field to remap, and the new value.
 
 ## Installing/Running
 
