@@ -12,3 +12,8 @@ jobs:
       - ruby/install-deps
       - ruby/rspec-test:
         include: spec/**/*_spec.rb
+
+workflows:
+  build:
+    jobs:
+      - test
