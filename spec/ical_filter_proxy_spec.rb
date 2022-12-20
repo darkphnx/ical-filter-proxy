@@ -22,33 +22,23 @@ RSpec.describe IcalFilterProxy do
 
     let(:calendars) { described_class.calendars }
 
-    it "builds a hash" do
-      expect(calendars).to be_a(Hash)
-    end
-
     it "has an entry for each calendar in the config file" do
       expect(calendars).to have_key('rota')
     end
 
-    it 'creates a Calenar object for each entry' do
-      expect(calendars['rota']).to be_a(IcalFilterProxy::Calendar)
-    end
+    it 'calls CalendarBuilder#build for each entry and stores the return' do
+      calendar_builder = instance_double(IcalFilterProxy::CalendarBuilder)
+      expect(IcalFilterProxy::CalendarBuilder)
+        .to receive(:new)
+        .with(example_config['rota'])
+        .and_return(calendar_builder)
 
-    it 'adds ical_url to the Calendar object' do
-      expect(calendars['rota'].ical_url).to eq('https://url-to-calendar.ical')
-    end
+      calendar = instance_double(IcalFilterProxy::CalendarBuilder)
+      expect(calendar_builder)
+        .to receive(:build)
+        .and_return(calendar)
 
-    it 'adds api_key to the Calenar object' do
-      expect(calendars['rota'].api_key).to eq('abc12')
-    end
-
-    it 'adds filters to the Calendar object' do
-      filter_rule = calendars['rota'].filter_rules.first
-
-      expect(filter_rule).to be_a(IcalFilterProxy::FilterRule)
-      expect(filter_rule.field).to eq('start_time')
-      expect(filter_rule.operator).to eq('equals')
-      expect(filter_rule.values).to eq('09:00')
+      expect(calendars['rota']).to eq(calendar)
     end
   end
 
@@ -63,6 +53,5 @@ RSpec.describe IcalFilterProxy do
       }
     }
   end
-
 
 end
