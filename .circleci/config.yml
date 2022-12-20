@@ -10,5 +10,5 @@ jobs:
     steps:
       - checkout
       - ruby/install-deps
-      - ruby/rspec-test
+      - ruby/rspec-test:
         include: spec/**/*_spec.rb
