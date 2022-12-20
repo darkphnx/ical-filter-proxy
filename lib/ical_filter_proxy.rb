@@ -12,15 +12,15 @@ require_relative 'ical_filter_proxy/filter_rule'
 require_relative 'ical_filter_proxy/filterable_event_adapter'
 
 module IcalFilterProxy
-  def self.filters
-    config.each_with_object({}) do |(filter_name, filter_config), filters|
+  def self.calendars
+    config.each_with_object({}) do |(calendar_name, filter_config), calendars|
       calendar = Calendar.new(filter_config["ical_url"], filter_config["api_key"], filter_config["timezone"])
 
       filter_config["rules"].each do |rule|
         calendar.add_rule(rule["field"], rule["operator"], rule["val"])
       end
 
-      filters[filter_name] = calendar
+      calendars[calendar_name] = calendar
     end
   end
 
