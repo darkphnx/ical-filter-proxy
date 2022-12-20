@@ -24,6 +24,7 @@ module IcalFilterProxy
 
     def add_rules
       rules = calendar_config["rules"]
+      return unless rules
 
       rules.each do |rule|
         calendar.add_rule(rule["field"],
