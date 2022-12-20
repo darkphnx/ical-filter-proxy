@@ -1,26 +1,14 @@
 version: 2.1
 orbs:
-  ruby: circleci/ruby@0.1.2
+  ruby: circleci/ruby@2.0.0
 
 jobs:
-  build:
+  test:
     docker:
-      - image: circleci/ruby:2.6.3-stretch-node
+      - image: cimg/ruby:2.7
 
     steps:
       - checkout
-      - run:
-          name: Which bundler?
-          command: bundle -v
-
-      - ruby/bundle-install
-
-      - run:
-          name: "RSpec"
-          command: |
-            mkdir /tmp/test-results
-            TESTFILES=$(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)
-            bundle exec rspec $TESTFILES --profile 10 --format RspecJunitFormatter --out /tmp/test-results/rspec.xml --format progress
-
-      - store_test_results:
-          path: /tmp/test-results
+      - ruby/install-deps
+      - ruby/rspec-test
+        include: spec/**/*_spec.rb
