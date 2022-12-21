@@ -44,10 +44,6 @@ jobs:
               --tag darkphnx/ical-filter-proxy:buildx-latest .
 
 workflows:
-  test:
-    jobs:
-      - test
-
   build-and-publish-docker-image:
     jobs:
       - docker/publish:
@@ -58,4 +54,5 @@ workflows:
 
   cross-build:
     jobs:
+      - test
       - cross-build-and-publish
