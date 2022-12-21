@@ -31,7 +31,7 @@ jobs:
           command: |
             docker context create cross-builder
             docker buildx create --name cross-builder cross-builder
-            docker buildx use arm-builder
+            docker buildx use cross-builder
             docker buildx inspect --bootstrap
       - run: 
           name: Cross-Build Image
