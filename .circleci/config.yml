@@ -17,7 +17,7 @@ jobs:
   build-and-publish:
     executor: docker/docker
     steps:
-      - docker/pubish:
+      - docker/publish:
         image: darkphnx/ical-filter-proxy
 
 
