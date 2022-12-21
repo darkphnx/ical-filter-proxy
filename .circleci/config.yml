@@ -48,13 +48,14 @@ workflows:
     jobs:
       - docker/publish:
           image: darkphnx/ical-filter-proxy
-          filters:
-            branches:
-              only: master
+          
 
-  cross-build:
+  test-and-build:
     jobs:
       - test
       - cross-build-and-publish:
           requires:
             - test
+          filters:
+            branches:
+              only: master
