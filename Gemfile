@@ -9,3 +9,4 @@ gem 'rackup', require: false
 gem 'rspec', require: false
 gem 'rspec_junit_formatter', require: false
 gem 'webmock', require: false
+gem 'to_regexp', require: false

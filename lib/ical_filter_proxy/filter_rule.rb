@@ -30,9 +30,9 @@ module IcalFilterProxy
         when 'includes'
           event_data.include?(value)
         when 'matches'
-          event_data =~ Regexp.new(value)
+          event_data =~ value.to_regexp
         else
-          false
+          raise "Unknown filter rule: " + operator
         end
       end
     end
