@@ -15,12 +15,12 @@ module IcalFilterProxy
 
         if ical_calendar
           if request.params['key'] == ical_calendar.api_key
-            [200, { 'Content-Type' => 'text/calendar' }, [ical_calendar.filtered_calendar]]
+            [200, { 'content-type' => 'text/calendar' }, [ical_calendar.filtered_calendar]]
           else
-            [403, { 'Content-Type' => 'text/plain' }, ['Authentication Incorrect']]
+            [403, { 'content-type' => 'text/plain' }, ['Authentication Incorrect']]
           end
         else
-          [404, { 'Content-Type' => 'text/plain' }, ['Calendar not found']]
+          [404, { 'content-type' => 'text/plain' }, ['Calendar not found']]
         end
       end
     end
