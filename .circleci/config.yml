@@ -55,4 +55,6 @@ workflows:
   cross-build:
     jobs:
       - test
-      - cross-build-and-publish
+      - cross-build-and-publish:
+          requires:
+            - test
