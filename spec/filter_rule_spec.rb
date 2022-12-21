@@ -132,5 +132,34 @@ RSpec.describe IcalFilterProxy::FilterRule do
       end
     end
 
+    context 'when operator is matches and value an array' do
+      it 'matches events where the pattern is matching the filter value' do
+        matching_filter_rule = described_class.new('summary', 'includes', ['/foobar/i', 'Nothing'])
+        expect(matching_filter_rule.match_event?(dummy_event)).to be true
+      end
+
+      it 'matches events where the more complex pattern is matching the filter value' do
+        matching_filter_rule = described_class.new('summary', 'includes', ['/^Foo[bB]a.$/', 'Nothing'])
+        expect(matching_filter_rule.match_event?(dummy_event)).to be true
+      end
+
+      it 'rejects events where the pattern is not matching of to the filter value' do
+        non_matching_filter_rule = described_class.new('summary', 'includes', ['/foobar/', 'Nothing'])
+        expect(non_matching_filter_rule.match_event?(dummy_event)).to be false
+      end
+    end
+
+    context 'when operator is not-matches and value an array' do
+      it 'matches events where the pattern does not match the filter value' do
+        matching_filter_rule = described_class.new('summary', 'not-includes', ['/foobar/', 'Nothing'])
+        expect(matching_filter_rule.match_event?(dummy_event)).to be true
+      end
+
+      it 'rejects events where the pattern matches the filter value' do
+        non_matching_filter_rule = described_class.new('summary', 'not-includes', ['/foobar/i', 'Nothing'])
+        expect(non_matching_filter_rule.match_event?(dummy_event)).to be false
+      end
+    end
+
   end
 end
