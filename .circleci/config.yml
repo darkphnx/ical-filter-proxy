@@ -15,6 +15,7 @@ jobs:
         include: spec/**/*_spec.rb
 
   build-and-publish:
+    executor: docker/docker
     steps:
       - docker/pubish:
         image: darkphnx/ical-filter-proxy
