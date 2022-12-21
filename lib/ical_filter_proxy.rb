@@ -6,6 +6,7 @@ require 'open-uri'
 require 'icalendar'
 require 'yaml'
 require 'forwardable'
+require 'to_regexp'
 
 require_relative 'ical_filter_proxy/calendar'
 require_relative 'ical_filter_proxy/filter_rule'

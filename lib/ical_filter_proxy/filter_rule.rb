@@ -27,8 +27,12 @@ module IcalFilterProxy
           event_data == value
         when 'startswith'
           event_data.start_with?(value)
+        when 'includes'
+          event_data.include?(value)
+        when 'matches'
+          event_data =~ value.to_regexp
         else
-          false
+          raise "Unknown filter rule: " + operator
         end
       end
     end

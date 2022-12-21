@@ -20,10 +20,14 @@ my_calendar_name:
         operator: not-equals # equals and not-equals supported
         val: "09:00" # A time in 24hour format, zero-padded
       - field: summary # summary and description supported
-        operator: startswith # startswith and not-startswith supported
+        operator: startswith # (not-)startswith, (not-)equals and (not-)includes supported
         val: # array of values also supported
           - Planning
           - Daily Standup
+      - field: summary # summary and description supported
+        operator: matches # match against regex pattern
+        val: # array of values also supported
+          - "/Team A/i"
 ```
 
 ## Additional Rules
@@ -63,7 +67,7 @@ Create a new API Gateway in the AWS Console and link to to a new Lambda process.
 
 Next we need to package the app up ready for Lambda. First of all, craft your config.yml and place it in the root of the source directory. A handy rake task is included which will fetch any dependencies and zip them up ready to be uploaded.
 
-```
+```bash
 bundle exec rake lamba:build
 ```
 
