@@ -14,6 +14,14 @@ jobs:
       - ruby/rspec-test:
           include: spec/**/*_spec.rb
 
+  cross-build-and-publish:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - setup_remote_docker
+      - checkout
+      - run: docker buildx build .
+
 workflows:
   test:
     jobs:
@@ -26,3 +34,7 @@ workflows:
           filters:
             branches:
               only: master
+
+  cross-build:
+    jobs:
+      - cross-build-and-publish
