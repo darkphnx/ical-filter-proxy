@@ -107,5 +107,30 @@ RSpec.describe IcalFilterProxy::FilterRule do
         expect(non_matching_filter_rule.match_event?(dummy_event)).to be false
       end
     end
+
+    context 'when operator is includes and value an array' do
+      it 'matches events where the value is part of the filter value' do
+        matching_filter_rule = described_class.new('summary', 'includes', ['oob', 'Nothing'])
+        expect(matching_filter_rule.match_event?(dummy_event)).to be true
+      end
+
+      it 'rejects events where the value is not part of to the filter value' do
+        non_matching_filter_rule = described_class.new('summary', 'includes', ['Bar', 'Nothing'])
+        expect(non_matching_filter_rule.match_event?(dummy_event)).to be false
+      end
+    end
+
+    context 'when operator is not-includes and value an array' do
+      it 'matches events where the value does not contain the filter value' do
+        matching_filter_rule = described_class.new('summary', 'not-includes', ['Bar', 'Nothing'])
+        expect(matching_filter_rule.match_event?(dummy_event)).to be true
+      end
+
+      it 'rejects events where the value contains the filter value' do
+        non_matching_filter_rule = described_class.new('summary', 'not-includes', ['oob', 'Nothing'])
+        expect(non_matching_filter_rule.match_event?(dummy_event)).to be false
+      end
+    end
+
   end
 end
