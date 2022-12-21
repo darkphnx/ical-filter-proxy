@@ -161,5 +161,12 @@ RSpec.describe IcalFilterProxy::FilterRule do
       end
     end
 
+    context 'when operator is unknown and value an array' do
+      it 'raises an exception' do
+        matching_filter_rule = described_class.new('summary', 'unknown', ['Nothing', 'Even more nothing'])
+        lambda { matching_filter_rule.match_event?(dummy_event) }.should raise_error
+      end
+    end
+
   end
 end
