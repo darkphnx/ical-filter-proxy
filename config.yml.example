@@ -1,7 +1,6 @@
-my_calendar_name:
+rota:
   ical_url: https://url-to-calendar.ical
-  api_key: myapikey
-  timezone: Europe/London
+  api_key: abc12
   rules:
     - field: start_time
       operator: equals
