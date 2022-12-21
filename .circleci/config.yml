@@ -44,18 +44,12 @@ jobs:
               --tag darkphnx/ical-filter-proxy:latest .
 
 workflows:
-  build-and-publish-docker-image:
-    jobs:
-      - docker/publish:
-          image: darkphnx/ical-filter-proxy
-          
-
   test-and-build:
     jobs:
       - test
       - cross-build-and-publish:
           requires:
             - test
-         # filters:
-         #   branches:
-         #     only: master
+          filters:
+            branches:
+              only: master
