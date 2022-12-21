@@ -20,10 +20,24 @@ jobs:
     steps:
       - setup_remote_docker
       - checkout
-      - run: | 
-          docker buildx build \
-            --platform linux/arm64/v8,linux/amd64 \
-            --tag darkphnx/ical-filter-proxy:buildx-latest .
+      - run:
+          name: Setup buildx and qemu
+          command: |
+            sudo apt-get update
+            sudo apt-get install -y qemu-user-static
+            sudo apt-get install -y binfmt-support
+      - run:
+          name: Create builder
+          command: |
+            docker buildx create --name arm-builder
+            docker buildx use arm-builder
+            docker buildx inspect --bootstrap
+      - run: 
+          name: Cross-Build Image
+          command: | 
+            docker buildx build \
+              --platform linux/arm64/v8,linux/amd64 \
+              --tag darkphnx/ical-filter-proxy:buildx-latest .
 
 workflows:
   test:
