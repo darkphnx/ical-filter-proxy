@@ -30,7 +30,7 @@ module IcalFilterProxy
         when 'includes'
           event_data.include?(value)
         when 'matches'
-          event_data =~ eval(value)
+          event_data =~ Regexp.new(value)
         else
           false
         end
