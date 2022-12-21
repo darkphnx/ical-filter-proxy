@@ -14,22 +14,12 @@ jobs:
       - ruby/rspec-test:
           include: spec/**/*_spec.rb
 
-  build-and-publish:
-    executor: docker/docker
-    steps:
-      - docker/publish:
-          image: darkphnx/ical-filter-proxy
-
-
 workflows:
   test:
     jobs:
       - test
 
-  build-and-publish:
-    # filters:
-    #   branches:
-    #     only: master
-
+  build-and-publish-docker-image:
     jobs:
-      - build-and-publish
+      - docker/publish:
+          image: darkphnx/ical-filter-proxy
