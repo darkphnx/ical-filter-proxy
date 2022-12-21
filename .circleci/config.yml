@@ -12,13 +12,13 @@ jobs:
       - checkout
       - ruby/install-deps
       - ruby/rspec-test:
-        include: spec/**/*_spec.rb
+          include: spec/**/*_spec.rb
 
   build-and-publish:
     executor: docker/docker
     steps:
       - docker/publish:
-        image: darkphnx/ical-filter-proxy
+          image: darkphnx/ical-filter-proxy
 
 
 workflows:
