@@ -1,4 +1,4 @@
-FROM ruby:2.5-slim
+FROM ruby:2.7-slim
 
 RUN bundle config --global frozen 1
 WORKDIR /app

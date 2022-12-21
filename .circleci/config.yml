@@ -1,6 +1,7 @@
 version: 2.1
 orbs:
   ruby: circleci/ruby@2.0.0
+  docker: circleci/docker@2.2.0
 
 jobs:
   test:
@@ -11,9 +12,17 @@ jobs:
       - checkout
       - ruby/install-deps
       - ruby/rspec-test:
-        include: spec/**/*_spec.rb
+          include: spec/**/*_spec.rb
 
 workflows:
-  build:
+  test:
     jobs:
       - test
+
+  build-and-publish-docker-image:
+    jobs:
+      - docker/publish:
+          image: darkphnx/ical-filter-proxy
+          filters:
+            branches:
+              only: master
