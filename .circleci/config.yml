@@ -40,8 +40,8 @@ jobs:
           name: Cross-Build Image
           command: | 
             docker buildx build --push \
-              --platform linux/arm64/v8,linux/amd64 \
-              --tag darkphnx/ical-filter-proxy:buildx-latest .
+              --platform linux/arm64,linux/amd64 \
+              --tag darkphnx/ical-filter-proxy:latest .
 
 workflows:
   build-and-publish-docker-image:
@@ -56,6 +56,6 @@ workflows:
       - cross-build-and-publish:
           requires:
             - test
-          filters:
-            branches:
-              only: master
+         # filters:
+         #   branches:
+         #     only: master
