@@ -35,7 +35,7 @@ jobs:
             docker buildx inspect --bootstrap
       - run:
           name: Login to Dockerhub
-          command: echo "${!DOCKER_PASSWORD}" | docker login -u "${!DOCKER_LOGIN}" --password-stdin
+          command: echo "${DOCKER_PASSWORD}" | docker login --username "${DOCKER_LOGIN}" --password-stdin
       - run: 
           name: Cross-Build Image
           command: | 
