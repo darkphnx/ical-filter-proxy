@@ -4,6 +4,7 @@ gem 'activesupport' # Used for it's handy timezone support
 gem 'icalendar'
 gem 'rake'
 gem 'rack', require: false
+gem 'rackup', require: false
 
 gem 'rspec', require: false
 gem 'rspec_junit_formatter', require: false
