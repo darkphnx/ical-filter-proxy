@@ -27,15 +27,15 @@ module IcalFilterProxy
       private
 
       def render_calendar(calendar)
-        { statusCode: 200, headers: { 'Content-Type' => 'text/calendar' }, body: calendar.filtered_calendar }
+        { statusCode: 200, headers: { 'content-type' => 'text/calendar' }, body: calendar.filtered_calendar }
       end
 
       def render_not_found
-        { statusCode: 404, headers: { 'Content-Type' => 'text/plain' }, body: 'Calendar not found' }
+        { statusCode: 404, headers: { 'content-type' => 'text/plain' }, body: 'Calendar not found' }
       end
 
       def render_forbidden
-        { statusCode: 403, headers: { 'Content-Type' => 'text/plain' }, body: "Authentication incorrect" }
+        { statusCode: 403, headers: { 'content-type' => 'text/plain' }, body: "Authentication incorrect" }
       end
     end
   end
