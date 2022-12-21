@@ -14,15 +14,42 @@ jobs:
       - ruby/rspec-test:
           include: spec/**/*_spec.rb
 
+  cross-build-and-publish:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - setup_remote_docker
+      - checkout
+      - run:
+          name: Setup buildx and qemu
+          command: |
+            sudo apt-get update
+            sudo apt-get install -y qemu-user-static
+            sudo apt-get install -y binfmt-support
+      - run:
+          name: Create builder
+          command: |
+            docker context create cross-builder
+            docker buildx create --name cross-builder cross-builder
+            docker buildx use cross-builder
+            docker buildx inspect --bootstrap
+      - run:
+          name: Login to Dockerhub
+          command: echo "${DOCKER_PASSWORD}" | docker login --username "${DOCKER_LOGIN}" --password-stdin
+      - run: 
+          name: Cross-Build Image
+          command: | 
+            docker buildx build --push \
+              --platform linux/arm64,linux/amd64 \
+              --tag darkphnx/ical-filter-proxy:latest .
+
 workflows:
-  test:
+  test-and-build:
     jobs:
       - test
-
-  build-and-publish-docker-image:
-    jobs:
-      - docker/publish:
-          image: darkphnx/ical-filter-proxy
+      - cross-build-and-publish:
+          requires:
+            - test
           filters:
             branches:
               only: master
