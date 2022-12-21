@@ -23,6 +23,6 @@ workflows:
     jobs:
       - docker/publish:
           image: darkphnx/ical-filter-proxy
-    filters:
-      branches:
-        only: master
+          filters:
+            branches:
+              only: master
