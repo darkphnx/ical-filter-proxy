@@ -33,10 +33,13 @@ jobs:
             docker buildx create --name cross-builder cross-builder
             docker buildx use cross-builder
             docker buildx inspect --bootstrap
+      - run:
+          name: Login to Dockerhub
+          command: echo "${!DOCKER_PASSWORD}" | docker login -u "${!DOCKER_LOGIN}" --password-stdin
       - run: 
           name: Cross-Build Image
           command: | 
-            docker buildx build \
+            docker buildx build --push \
               --platform linux/arm64/v8,linux/amd64 \
               --tag darkphnx/ical-filter-proxy:buildx-latest .
 
