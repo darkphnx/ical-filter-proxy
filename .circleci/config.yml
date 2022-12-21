@@ -29,7 +29,8 @@ jobs:
       - run:
           name: Create builder
           command: |
-            docker buildx create --name arm-builder
+            docker context create cross-builder
+            docker buildx create --name cross-builder cross-builder
             docker buildx use arm-builder
             docker buildx inspect --bootstrap
       - run: 
