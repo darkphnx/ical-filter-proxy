@@ -14,9 +14,9 @@ In addition, display alarms can be created or cleared.
 
 ```yaml
 my_calendar_name:
-   ical_url: https://source-calendar.com/my_calendar.ics # Source calendar
-   api_key: myapikey # (optional) append ?key=myapikey to your URL to grant access
-   timezone: Europe/London # (optional) ensure all time comparisons are done in this TZ
+   ical_url: https://source-calendar.com/my_calendar.ics # Source calendar, optional from Environment variable #{SOME_ENV_NAME}
+   api_key: myapikey # (optional) append ?key=myapikey to your URL to grant access, optional from Environment variable #{SOME_ENV_NAME}
+   timezone: Europe/London # (optional) ensure all time comparisons are done in this TZ, optional from Environment variable #{SOME_ENV_NAME}
    rules:
       - field: start_time # start_time and end_time supported
         operator: not-equals # equals and not-equals supported
