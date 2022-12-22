@@ -17,7 +17,7 @@ module IcalFilterProxy
     end
 
     def add_alarm_trigger(alarm_trigger)
-      self.alarm_triggers << alarm_trigger
+      self.alarm_triggers << AlarmTrigger.new(alarm_trigger)
     end
 
     def filtered_calendar
@@ -33,7 +33,7 @@ module IcalFilterProxy
           e.alarm do |a|
             a.action = "DISPLAY"
             a.description = e.summary
-            a.trigger = t
+            a.trigger = t.get_trigger
           end
         end
       end

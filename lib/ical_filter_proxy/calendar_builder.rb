@@ -46,23 +46,8 @@ module IcalFilterProxy
       return unless triggers
 
       triggers.each do |trigger|
-        calendar.add_alarm_trigger(generate_iso_format(trigger))
+        calendar.add_alarm_trigger(trigger)
         end
-    end
-
-    def generate_iso_format(input)
-      case input
-      when /(\d+)\s+days?/i
-        "-P#{$1}D"
-      when /(\d+)\s+hours?/i
-        "-PT#{$1}H"
-      when /(\d+)\s+minutes?/i
-        "-PT#{$1}M"
-      when /^-P.*/
-        input
-      else
-        raise "Unknown trigger pattern: " + input
-      end
     end
 
   end
