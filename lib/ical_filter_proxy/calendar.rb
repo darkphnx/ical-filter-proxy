@@ -1,6 +1,6 @@
 module IcalFilterProxy
   class Calendar
-    attr_accessor :ical_url, :api_key, :timezone, :filter_rules, :clear_existing_alarms, :triggers
+    attr_accessor :ical_url, :api_key, :timezone, :filter_rules, :clear_existing_alarms, :alarm_triggers
 
     def initialize(ical_url, api_key, timezone = 'UTC')
       self.ical_url = ical_url
@@ -9,15 +9,15 @@ module IcalFilterProxy
 
       self.filter_rules = []
       self.clear_existing_alarms = false
-      self.triggers = []
+      self.alarm_triggers = []
     end
 
     def add_rule(field, operator, value)
       self.filter_rules << FilterRule.new(field, operator, value)
     end
 
-    def add_trigger(trigger)
-      self.triggers.append(trigger)
+    def add_alarm_trigger(alarm_trigger)
+      self.alarm_triggers.append(alarm_trigger)
     end
 
     def set_clear_existing_alarms
@@ -33,7 +33,7 @@ module IcalFilterProxy
 
       filtered_calendar.events.select do |e|
         e.alarms.clear if clear_existing_alarms
-        triggers.each do |t|
+        alarm_triggers.each do |t|
           e.alarm do |a|
             a.action = "DISPLAY"
             a.description = e.summary
