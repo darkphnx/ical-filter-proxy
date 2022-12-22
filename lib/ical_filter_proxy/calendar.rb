@@ -33,7 +33,7 @@ module IcalFilterProxy
           e.alarm do |a|
             a.action = "DISPLAY"
             a.description = e.summary
-            a.trigger = t.get_trigger
+            a.trigger = t.alarm_trigger
           end
         end
       end

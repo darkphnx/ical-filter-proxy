@@ -3,12 +3,8 @@ module IcalFilterProxy
 
     attr_accessor :alarm_trigger
 
-    def initialize(alarm_trigger)
-      self.alarm_trigger = alarm_trigger
-    end
-
-    def get_trigger
-      generate_iso_format(self.alarm_trigger)
+    def initialize(input_trigger)
+      self.alarm_trigger = generate_iso_format(input_trigger)
     end
 
     private

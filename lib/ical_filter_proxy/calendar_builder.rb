@@ -38,16 +38,14 @@ module IcalFilterProxy
       alarms = calendar_config["alarms"]
       return unless alarms
 
-      if alarms["clear_existing"] == true
-        calendar.clear_existing_alarms = true
-      end
+      calendar.clear_existing_alarms = true if alarms['clear_existing']
 
       triggers = alarms["triggers"]
       return unless triggers
 
       triggers.each do |trigger|
         calendar.add_alarm_trigger(trigger)
-        end
+      end
     end
 
   end
