@@ -39,7 +39,7 @@ module IcalFilterProxy
       return unless alarms
 
       if alarms["clear_existing"] == true
-        calendar.set_clear_existing_alarms
+        calendar.clear_existing_alarms = true
       end
 
       triggers = alarms["triggers"]

@@ -20,10 +20,6 @@ module IcalFilterProxy
       self.alarm_triggers << alarm_trigger
     end
 
-    def set_clear_existing_alarms
-      self.clear_existing_alarms = true
-    end
-
     def filtered_calendar
       filtered_calendar = Icalendar::Calendar.new
 
