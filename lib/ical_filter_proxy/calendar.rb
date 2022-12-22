@@ -3,9 +3,9 @@ module IcalFilterProxy
     attr_accessor :ical_url, :api_key, :timezone, :filter_rules, :clear_existing_alarms, :alarm_triggers
 
     def initialize(ical_url, api_key, timezone = 'UTC')
-      self.ical_url = resolve_from_env(ical_url)
-      self.api_key = resolve_from_env(api_key)
-      self.timezone = resolve_from_env(timezone)
+      self.ical_url = ical_url
+      self.api_key = api_key
+      self.timezone = timezone
 
       self.filter_rules = []
       self.clear_existing_alarms = false
@@ -42,17 +42,6 @@ module IcalFilterProxy
     end
 
     private
-
-    def resolve_from_env(value)
-      if /^#\{(.*)}$/ =~ value
-        if ENV.key?( "#{$1}" )
-          return ENV["#{$1}"]
-        else
-          raise "Unable to find configuration environment variable #{$1}"
-        end
-      end
-      value
-    end
 
     def filtered_events
       original_ics.events.select do |e|
