@@ -53,13 +53,13 @@ module IcalFilterProxy
     def generate_iso_format(input)
       case input
       when /(\d+)\s+days?/i
-        return "-P#{$1}D"
+        "-P#{$1}D"
       when /(\d+)\s+hours?/i
-        return "-PT#{$1}H"
+        "-PT#{$1}H"
       when /(\d+)\s+minutes?/i
-        return "-PT#{$1}M"
+        "-PT#{$1}M"
       when /^-P.*/
-        return input
+        input
       else
         raise "Unknown trigger pattern: " + input
       end
