@@ -49,7 +49,11 @@ RSpec.describe IcalFilterProxy do
         'api_key' => 'abc12',
         'rules' => [
           { 'field' => 'start_time', 'operator' => 'equals', 'val' => '09:00' }
-        ]
+        ],
+        'alarms' => {
+          'clear_existing' => true,
+          'triggers'=> [ '-P1DT0H0M0S', '-P1DT1H1M2S' ]
+        }
       }
     }
   end
