@@ -17,7 +17,7 @@ module IcalFilterProxy
     end
 
     def add_alarm_trigger(alarm_trigger)
-      self.alarm_triggers.append(alarm_trigger)
+      self.alarm_triggers << alarm_trigger
     end
 
     def set_clear_existing_alarms
