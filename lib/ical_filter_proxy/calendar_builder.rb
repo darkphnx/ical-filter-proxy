@@ -10,6 +10,7 @@ module IcalFilterProxy
     def build
       create_calendar
       add_rules
+      add_alarms
 
       calendar
     end
@@ -31,6 +32,22 @@ module IcalFilterProxy
                           rule["operator"],
                           rule["val"])
       end
+    end
+
+    def add_alarms
+      alarms = calendar_config["alarms"]
+      return unless alarms
+
+      if alarms["clear_existing"] == true
+        calendar.set_clear_existing_alarms
+      end
+
+      triggers = alarms["triggers"]
+      return unless triggers
+
+      triggers.each do |trigger|
+        calendar.add_trigger(trigger)
+        end
     end
 
   end

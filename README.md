@@ -8,6 +8,8 @@ filtering options (looking at your Google Calendar)?
 Use ical-filter-proxy to (you guessed it) proxy and filter your iCal feed. Define your source
 calendar and filtering options in `config.yml` and you're good to go.
 
+In addition, display alarms can be created or cleared.
+
 ## Configuration
 
 ```yaml
@@ -27,7 +29,12 @@ my_calendar_name:
       - field: summary # summary and description supported
         operator: matches # match against regex pattern
         val: # array of values also supported
-          - "/Team A/i"
+          - '/Team A/i'
+   alarms: # (optional) create/clear alarms for filtered events
+     clear_existing: true # (optional) if true, existing alarms will be removed, default: false 
+     triggers: # (optional) triggers for new alarms. Description will be the alarm summary, action is 'DISPLAY'
+       - '-P1DT0H0M0S'
+       - -P1DT1H1M2S
 ```
 
 ## Additional Rules
