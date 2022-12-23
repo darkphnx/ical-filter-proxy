@@ -7,6 +7,7 @@ RSpec.describe IcalFilterProxy do
 
   describe '.config' do
     before do
+      ENV['ICAL_FILTER_PROXY_API_KEY'] = "abc12"
       expect(IcalFilterProxy).to receive(:config_file_path).and_return File.expand_path('../config.yml.example', __dir__)
     end
 
