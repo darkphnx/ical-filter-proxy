@@ -68,7 +68,7 @@ RSpec.describe IcalFilterProxy::Calendar do
         cal.add_alarm_trigger("1 day")
 
         filtered_ical = cal.filtered_calendar
-        expect(filtered_ical.gsub(/[\r\n]+/, "\n")).to eq(filtered_calendar.gsub(/[\r\n]+/, "\n"))
+        expect(filtered_ical.gsub(/[\r\n]+/, "\n")).to eq(filtered_calendar_with_new_alarm.gsub(/[\r\n]+/, "\n"))
       end
     end
   end
