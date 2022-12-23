@@ -14,9 +14,9 @@ In addition, display alarms can be created or cleared.
 
 ```yaml
 my_calendar_name:
-   ical_url: https://source-calendar.com/my_calendar.ics # Source calendar, optional from Environment variable ${ICAL_FILTER_PROXY_ICAL_URL}
-   api_key: myapikey # (optional) append ?key=myapikey to your URL to grant access, optional from Environment variable ${ICAL_FILTER_PROXY_API_KEY}
-   timezone: Europe/London # (optional) ensure all time comparisons are done in this TZ, optional from Environment variable ${ICAL_FILTER_PROXY_TIMEZONE}
+   ical_url: https://source-calendar.com/my_calendar.ics # Source calendar
+   api_key: myapikey # (optional) append ?key=myapikey to your URL to grant access
+   timezone: Europe/London # (optional) ensure all time comparisons are done in this TZ
    rules:
       - field: start_time # start_time and end_time supported
         operator: not-equals # equals and not-equals supported
@@ -36,6 +36,18 @@ my_calendar_name:
        - '-P1DT0H0M0S' # iso8061 supported
        - 2 days # supports full day[s], hour[s], minute[s], no combination in one trigger
 ```
+
+### Variable substitution
+
+It might be useful to inject configuration values as environment variable.  
+Variables are substituted if they begin with `ICAL_FILTER_PROXY_<value>` and are defined in the configuration like `${ICAL_FILTER_PROXY_<value>}`.  
+
+Example: 
+```yaml
+  api_key: ${ICAL_FILTER_PROXY_API_KEY}
+```
+
+If a placeholder is defined but environment variable is missing, it is substituted with an empty string!
 
 ## Additional Rules
 
