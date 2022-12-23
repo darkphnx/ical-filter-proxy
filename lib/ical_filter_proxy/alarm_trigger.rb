@@ -11,11 +11,11 @@ module IcalFilterProxy
 
     def generate_iso_format(alarm_trigger)
       case alarm_trigger
-      when /(\d+)\s+days?/i
+      when /^(\d+)\s+days?$/i
         "-P#{$1}D"
-      when /(\d+)\s+hours?/i
+      when /^(\d+)\s+hours?$/i
         "-PT#{$1}H"
-      when /(\d+)\s+minutes?/i
+      when /^(\d+)\s+minutes?$/i
         "-PT#{$1}M"
       when /^-P.*/
         alarm_trigger
