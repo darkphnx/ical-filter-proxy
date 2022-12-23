@@ -47,11 +47,28 @@ RSpec.describe IcalFilterProxy::Calendar do
         expect(@stub).to have_been_requested
       end
 
-      it 'outputs a fresh calendar with only the events that match the filter_rules' do
+      it 'outputs a fresh calendar with only the events that match the filter_rules and the original alarm' do
         cal.add_rule('start_time', 'equals', '10:00')
 
         filtered_ical = cal.filtered_calendar
-        expect(filtered_ical).to eq(filtered_calendar)
+        expect(filtered_ical.gsub("\r\n", "\n")).to eq(filtered_calendar_with_original_alarm.gsub("\r\n", "\n"))
+      end
+
+      it 'outputs a fresh calendar with only the events that match the filter_rules and removed alarms' do
+        cal.add_rule('start_time', 'equals', '10:00')
+        cal.clear_existing_alarms = true
+
+        filtered_ical = cal.filtered_calendar
+        expect(filtered_ical.gsub("\r\n", "\n")).to eq(filtered_calendar_without_alarm.gsub("\r\n", "\n"))
+      end
+
+      it 'outputs a fresh calendar with only the events that match the filter_rules and new alarm' do
+        cal.add_rule('start_time', 'equals', '10:00')
+        cal.clear_existing_alarms = true
+        cal.add_alarm_trigger("1 day")
+
+        filtered_ical = cal.filtered_calendar
+        expect(filtered_ical.gsub("\r\n", "\n")).to eq(filtered_calendar_with_new_alarm.gsub("\r\n", "\n"))
       end
     end
   end
@@ -62,7 +79,15 @@ RSpec.describe IcalFilterProxy::Calendar do
     File.read(File.expand_path('../fixtures/original_calendar.ics', __FILE__))
   end
 
-  def filtered_calendar
-    File.read(File.expand_path('../fixtures/filtered_calendar.ics', __FILE__))
+  def filtered_calendar_with_original_alarm
+    File.read(File.expand_path('../fixtures/filtered_calendar_with_original_alarm.ics', __FILE__))
+  end
+
+  def filtered_calendar_without_alarm
+    File.read(File.expand_path('../fixtures/filtered_calendar_without_alarm.ics', __FILE__))
+  end
+
+  def filtered_calendar_with_new_alarm
+    File.read(File.expand_path('../fixtures/filtered_calendar_with_new_alarm.ics', __FILE__))
   end
 end
