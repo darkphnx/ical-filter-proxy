@@ -6,12 +6,15 @@ RSpec.describe IcalFilterProxy do
   end
 
   describe '.config' do
-    before do
-      ENV['ICAL_FILTER_PROXY_API_KEY'] = "abc12"
-      expect(IcalFilterProxy).to receive(:config_file_path).and_return File.expand_path('../config.yml.example', __dir__)
-    end
 
     it 'parses the YAML file at config_file_path' do
+      expect(IcalFilterProxy).to receive(:config_file_path).and_return File.expand_path('./fixtures/config.yml', __dir__)
+      expect(described_class.config).to eq example_config
+    end
+
+    it 'parses the YAML file at config_file_path and replaces environment variables' do
+      ENV['ICAL_FILTER_PROXY_API_KEY'] = "abc12"
+      expect(IcalFilterProxy).to receive(:config_file_path).and_return File.expand_path('./fixtures/config-with-env.yml', __dir__)
       expect(described_class.config).to eq example_config
     end
   end
