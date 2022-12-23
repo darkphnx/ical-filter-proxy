@@ -22,10 +22,15 @@ module IcalFilterProxy
   end
 
   def self.config
-    YAML.safe_load(File.read(config_file_path))
+    content = File.read(config_file_path)
+    content.gsub! /\${(ICAL_FILTER_PROXY_[^}]+)}/ do
+      ENV[$1]
+    end
+    YAML.safe_load(content)
   end
 
   def self.config_file_path
     File.expand_path('../config.yml', __dir__)
   end
+
 end

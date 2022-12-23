@@ -37,6 +37,18 @@ my_calendar_name:
        - 2 days # supports full day[s], hour[s], minute[s], no combination in one trigger
 ```
 
+### Variable substitution
+
+It might be useful to inject configuration values as environment variable.  
+Variables are substituted if they begin with `ICAL_FILTER_PROXY_<value>` and are defined in the configuration like `${ICAL_FILTER_PROXY_<value>}`.  
+
+Example: 
+```yaml
+  api_key: ${ICAL_FILTER_PROXY_API_KEY}
+```
+
+If a placeholder is defined but environment variable is missing, it is substituted with an empty string!
+
 ## Additional Rules
 
 At the moment rules are pretty simple, supporting only start times, end times, equals and
