@@ -1,0 +1,11 @@
+# Ignore everything
+*
+
+# Allow files and directories
+!/Gemfile
+!/Gemfile.lock
+!/config.ru
+!/lib
+
+# Ignore unnecessary files inside allowed directories
+**/lambda_app.rb
