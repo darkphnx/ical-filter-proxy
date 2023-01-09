@@ -11,6 +11,11 @@ module IcalFilterProxy
         request = Rack::Request.new(env)
 
         requested_calendar = request.path_info.sub(/^\//, '')
+
+        if requested_calendar.strip.empty?
+          return [200, { 'content-type' => 'text/plain' }, ['Welcome to ical-filter-proxy']]
+        end
+
         ical_calendar = calendars[requested_calendar]
 
         if ical_calendar
