@@ -1,7 +1,7 @@
 GEM
   remote: https://rubygems.org/
   specs:
-    activesupport (7.0.4)
+    activesupport (7.0.4.1)
       concurrent-ruby (~> 1.0, >= 1.0.2)
       i18n (>= 1.6, < 2)
       minitest (>= 5.1)
@@ -18,7 +18,7 @@ GEM
     icalendar (2.8.0)
       ice_cube (~> 0.16)
     ice_cube (0.16.4)
-    minitest (5.16.3)
+    minitest (5.17.0)
     public_suffix (5.0.1)
     rack (3.0.2)
     rackup (0.2.3)
