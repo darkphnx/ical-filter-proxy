@@ -22,7 +22,7 @@ module IcalFilterProxy
   end
 
   def self.config
-    content = File.read(config_file_path)
+    content = File.read(config_file_path, :encoding => 'UTF-8')
     content.gsub! /\${(ICAL_FILTER_PROXY_[^}]+)}/ do
       ENV[$1]
     end
