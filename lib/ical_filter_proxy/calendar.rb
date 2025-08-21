@@ -59,7 +59,7 @@ module IcalFilterProxy
     end
 
     def raw_original_ical
-      URI.open(ical_url, headers_array&.reduce({}, :merge) || {}).read
+      URI.open(ical_url, request_headers&.reduce({}, :merge) || {}).read
     end
   end
 end
