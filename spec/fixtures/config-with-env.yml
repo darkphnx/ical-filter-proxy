@@ -1,6 +1,6 @@
 rota:
   ical_url: https://url-to-calendar.ical
-  api_key: ${ICAL_FILTER_PROXY_API_KEY}
+  api_key: ${ICAL_PROXY_API_KEY}
   rules:
     - field: start_time
       operator: equals

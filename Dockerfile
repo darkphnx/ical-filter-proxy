@@ -1,4 +1,4 @@
-FROM ruby:2.7-alpine AS base
+FROM ruby:3.4-alpine AS base
 RUN apk add --update tzdata
 
 FROM base AS dependencies
@@ -14,5 +14,5 @@ WORKDIR /app
 COPY --from=dependencies /usr/local/bundle/ /usr/local/bundle/
 COPY --chown=app . ./
 
-EXPOSE 8000
-CMD ["/usr/local/bin/bundle", "exec", "rackup", "--host=0.0.0.0", "--port=8000"]
+EXPOSE 9292
+CMD ["bundle", "exec", "puma", "-C", "config/puma.rb"]

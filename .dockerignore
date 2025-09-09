@@ -6,6 +6,7 @@
 !/Gemfile.lock
 !/config.ru
 !/lib
+!/config/puma.rb
 
 # Ignore unnecessary files inside allowed directories
 **/lambda_app.rb

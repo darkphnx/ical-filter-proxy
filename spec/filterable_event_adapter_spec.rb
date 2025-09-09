@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-RSpec.describe IcalFilterProxy::FilterableEventAdapter do
+RSpec.describe IcalProxy::FilterableEventAdapter do
   let(:start_time) { Time.new(1987, 2, 21, 4, 30, 0, 0) }
   let(:end_time) { Time.new(2017, 6, 29, 23, 59, 0, 0) }
   let(:summary) { "The life and times of Dan" }

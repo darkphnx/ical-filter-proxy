@@ -1,4 +1,4 @@
-module IcalFilterProxy
+module IcalProxy
   class AlarmTrigger
 
     attr_accessor :alarm_trigger

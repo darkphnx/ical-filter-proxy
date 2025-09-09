@@ -1,4 +1,4 @@
-module IcalFilterProxy
+module IcalProxy
   module Servers
     class VercelApp
       attr_accessor :calendars
@@ -30,7 +30,7 @@ module IcalFilterProxy
       def render_calendar(calendar, response)
         response.status = 200
         response['Content-Type'] = 'text/calendar'
-        response.body = calendar.filtered_calendar
+        response.body = calendar.proxied_calendar
       end
 
       def render_not_found(response)

@@ -1,4 +1,4 @@
-module IcalFilterProxy
+module IcalProxy
   class FilterRule
 
     attr_accessor :field, :operator, :values, :negation

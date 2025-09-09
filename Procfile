@@ -1,1 +1,1 @@
-web: bundle exec rackup -p 8082
+web: bundle exec puma -C config/puma.rb

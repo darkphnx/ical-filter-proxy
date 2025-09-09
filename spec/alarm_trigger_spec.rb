@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-RSpec.describe IcalFilterProxy::AlarmTrigger do
+RSpec.describe IcalProxy::AlarmTrigger do
   describe '.new' do
     it 'accepts valid iso trigger' do
       alarm_trigger = described_class.new("-P1DT1H1M2S")
@@ -31,10 +31,10 @@ RSpec.describe IcalFilterProxy::AlarmTrigger do
     end
 
     it 'fails on invalid triggers' do
-      lambda { described_class.new("lorem ipsum") }.should raise_error
-      lambda { described_class.new("-10 days") }.should raise_error
-      lambda { described_class.new("PT10M") }.should raise_error
-      lambda { described_class.new("5 days 10 minutes") }.should raise_error
+      expect { described_class.new("lorem ipsum") }.to raise_error
+      expect { described_class.new("-10 days") }.to raise_error
+      expect { described_class.new("PT10M") }.to raise_error
+      expect { described_class.new("5 days 10 minutes") }.to raise_error
     end
 
   end

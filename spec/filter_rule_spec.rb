@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-RSpec.describe IcalFilterProxy::FilterRule do
+RSpec.describe IcalProxy::FilterRule do
   describe '.new' do
     it 'accepts field, operator and value' do
       filter_rule = described_class.new('start_time', 'equals', '09:00')
@@ -164,7 +164,7 @@ RSpec.describe IcalFilterProxy::FilterRule do
     context 'when operator is unknown and value an array' do
       it 'raises an exception' do
         matching_filter_rule = described_class.new('summary', 'unknown', ['Nothing', 'Even more nothing'])
-        lambda { matching_filter_rule.match_event?(dummy_event) }.should raise_error
+        expect { matching_filter_rule.match_event?(dummy_event) }.to raise_error
       end
     end
 

@@ -10,3 +10,21 @@ rota:
     triggers:
       - '-P1DT0H0M0S'
       - '-P1DT1H1M2S'
+  transformations:
+    rename:
+      - pattern: '/spin( class)?/i'
+        to: 'Spin'
+        search: ['summary', 'description']
+        regex: true
+      - pattern: 'Draft'
+        replace: 'Final'
+    location:
+      - extract_from: 'description'
+        pattern: '/Location:\\s*([^\\n]+)/i'
+        set_if_blank: true
+      - pattern: '/Watford/i'
+        search: ['summary', 'description']
+        geo: { lat: 51.6565, lon: -0.3903 }
+      - pattern: '/Hemel/i'
+        search: ['summary', 'description']
+        location: 'HP1 2AA'

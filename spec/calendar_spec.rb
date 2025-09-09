@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-RSpec.describe IcalFilterProxy::Calendar do
+RSpec.describe IcalProxy::Calendar do
   let(:url) { 'http://example.com/ical.ics' }
   let(:api_key) { 'abc123' }
   let(:cal) { described_class.new(url, api_key) }
@@ -37,20 +37,20 @@ RSpec.describe IcalFilterProxy::Calendar do
       end
     end
 
-    describe '#filtered_calendar' do
+    describe '#proxied_calendar' do
       before(:each) do
         @stub = stub_request(:get, "http://example.com/ical.ics").to_return(body: original_calendar)
       end
 
       it 'fetches the original calendar from the ical_url' do
-        cal.filtered_calendar
+        cal.proxied_calendar
         expect(@stub).to have_been_requested
       end
 
       it 'outputs a fresh calendar with only the events that match the filter_rules and the original alarm' do
         cal.add_rule('start_time', 'equals', '10:00')
 
-        filtered_ical = cal.filtered_calendar
+        filtered_ical = cal.proxied_calendar
         expect(filtered_ical.gsub("\r\n", "\n")).to eq(filtered_calendar_with_original_alarm.gsub("\r\n", "\n"))
       end
 
@@ -58,7 +58,7 @@ RSpec.describe IcalFilterProxy::Calendar do
         cal.add_rule('start_time', 'equals', '10:00')
         cal.clear_existing_alarms = true
 
-        filtered_ical = cal.filtered_calendar
+        filtered_ical = cal.proxied_calendar
         expect(filtered_ical.gsub("\r\n", "\n")).to eq(filtered_calendar_without_alarm.gsub("\r\n", "\n"))
       end
 
@@ -67,7 +67,7 @@ RSpec.describe IcalFilterProxy::Calendar do
         cal.clear_existing_alarms = true
         cal.add_alarm_trigger("1 day")
 
-        filtered_ical = cal.filtered_calendar
+        filtered_ical = cal.proxied_calendar
         expect(filtered_ical.gsub(/[\r\n]+/, "\n")).to eq(filtered_calendar_with_new_alarm.gsub(/[\r\n]+/, "\n"))
       end
     end

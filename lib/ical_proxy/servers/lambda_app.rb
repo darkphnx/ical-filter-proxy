@@ -1,4 +1,4 @@
-module IcalFilterProxy
+module IcalProxy
   module Servers
     class LambdaApp
       attr_accessor :calendars
@@ -27,7 +27,7 @@ module IcalFilterProxy
       private
 
       def render_calendar(calendar)
-        { statusCode: 200, headers: { 'content-type' => 'text/calendar' }, body: calendar.filtered_calendar }
+        { statusCode: 200, headers: { 'content-type' => 'text/calendar' }, body: calendar.proxied_calendar }
       end
 
       def render_not_found

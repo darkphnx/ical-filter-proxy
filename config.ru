@@ -1,8 +1,5 @@
-require 'rack'
-require_relative 'lib/ical_filter_proxy'
-require_relative 'lib/ical_filter_proxy/servers/rack_app'
+require_relative './lib/ical_proxy'
+require_relative './lib/ical_proxy/servers/puma_app'
 
-calendars = IcalFilterProxy.calendars
-app = IcalFilterProxy::Servers::RackApp.new(calendars)
+run IcalProxy::Servers::PumaApp.new(IcalProxy.calendars)
 
-run app

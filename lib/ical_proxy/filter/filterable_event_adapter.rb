@@ -1,4 +1,4 @@
-module IcalFilterProxy
+module IcalProxy
   # Wraps an Icalendar::Event and exposes filterable properties such as start_time or end_time.
   class FilterableEventAdapter
     attr_reader :raw_event, :options

@@ -1,6 +1,6 @@
-module IcalFilterProxy
+module IcalProxy
   class Calendar
-    attr_accessor :ical_url, :api_key, :timezone, :filter_rules, :clear_existing_alarms, :alarm_triggers
+    attr_accessor :ical_url, :api_key, :timezone, :filter_rules, :clear_existing_alarms, :alarm_triggers, :transformations
 
     def initialize(ical_url, api_key, timezone = 'UTC')
       self.ical_url = ical_url
@@ -10,6 +10,7 @@ module IcalFilterProxy
       self.filter_rules = []
       self.clear_existing_alarms = false
       self.alarm_triggers = []
+      self.transformations = []
     end
 
     def add_rule(field, operator, value)
@@ -20,14 +21,21 @@ module IcalFilterProxy
       self.alarm_triggers << AlarmTrigger.new(alarm_trigger)
     end
 
-    def filtered_calendar
-      filtered_calendar = Icalendar::Calendar.new
+    def add_transformation(*args)
+      # Accept a prebuilt transformer object that responds to #apply
+      raise ArgumentError, 'add_transformation expects a transformer object' unless args.size == 1
+      transformer = args.first
+      self.transformations << transformer
+    end
+
+    def proxied_calendar
+      proxied_calendar = Icalendar::Calendar.new
 
       filtered_events.each do |original_event|
-        filtered_calendar.add_event(original_event)
+        proxied_calendar.add_event(original_event)
       end
 
-      filtered_calendar.events.select do |e|
+      proxied_calendar.events.select do |e|
         e.alarms.clear if clear_existing_alarms
         alarm_triggers.each do |t|
           e.alarm do |a|
@@ -36,9 +44,14 @@ module IcalFilterProxy
             a.trigger = t.alarm_trigger
           end
         end
+
+        transformations.each do |t|
+          next unless t.respond_to?(:apply)
+          t.apply(e)
+        end
       end
 
-      filtered_calendar.to_ical
+      proxied_calendar.to_ical
     end
 
     private

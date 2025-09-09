@@ -6,7 +6,7 @@ namespace :lambda do
     `bundle install --deployment`
 
     STDOUT.puts "Creating archive"
-    `cd #{File.expand_path(__dir__)} && zip -r ical-filter-proxy.zip *`
+    `cd #{File.expand_path(__dir__)} && zip -r ical-proxy.zip *`
 
     STDOUT.puts "Cleaning up"
     `rm -rf #{File.expand_path('vendor', __dir__)}`

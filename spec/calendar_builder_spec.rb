@@ -1,8 +1,6 @@
 require 'spec_helper'
 
-require 'spec_helper'
-
-RSpec.describe IcalFilterProxy::CalendarBuilder do
+RSpec.describe IcalProxy::CalendarBuilder do
 
   subject { described_class.new(example_config) }
 
@@ -24,7 +22,7 @@ RSpec.describe IcalFilterProxy::CalendarBuilder do
     let(:calendar) { subject.build }
 
     it 'builds a Calendar' do
-      expect(calendar).to be_a(IcalFilterProxy::Calendar)
+      expect(calendar).to be_a(IcalProxy::Calendar)
     end
 
     it 'adds ical_url to the Calendar object' do
@@ -38,7 +36,7 @@ RSpec.describe IcalFilterProxy::CalendarBuilder do
     it 'adds filter rules to the Calendar object' do
       filter_rule = calendar.filter_rules.first
 
-      expect(filter_rule).to be_a(IcalFilterProxy::FilterRule)
+      expect(filter_rule).to be_a(IcalProxy::FilterRule)
       expect(filter_rule.field).to eq('start_time')
       expect(filter_rule.operator).to eq('equals')
       expect(filter_rule.values).to eq('09:00')
@@ -51,7 +49,7 @@ RSpec.describe IcalFilterProxy::CalendarBuilder do
     it 'adds alarm triggers to the Calendar object' do
       alarm_trigger = calendar.alarm_triggers.first
 
-      expect(alarm_trigger).to be_a(IcalFilterProxy::AlarmTrigger)
+      expect(alarm_trigger).to be_a(IcalProxy::AlarmTrigger)
       expect(alarm_trigger.alarm_trigger).to eq('-P10D')
     end
 
