@@ -33,7 +33,7 @@ my_calendar_name:
    alarms: # (optional) create/clear alarms for filtered events
      clear_existing: true # (optional) if true, existing alarms will be removed, default: false 
      triggers: # (optional) triggers for new alarms. Description will be the alarm summary, action is 'DISPLAY'
-       - '-P1DT0H0M0S' # iso8061 supported
+       - '-P1DT0H0M0S' # iso8601 supported
        - 2 days # supports full day[s], hour[s], minute[s], no combination in one trigger
 ```
 
