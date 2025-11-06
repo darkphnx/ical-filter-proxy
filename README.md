@@ -15,6 +15,8 @@ In addition, display alarms can be created or cleared.
 ```yaml
 my_calendar_name:
    ical_url: https://source-calendar.com/my_calendar.ics # Source calendar
+   request_headers: # (optional) add headers send when requesting the ical url 
+     - User-Agent: 'Mozilla/5.0 (X11; Linux x86_64; rv:128.0) Gecko/20100101 Firefox/128.0'
    api_key: myapikey # (optional) append ?key=myapikey to your URL to grant access
    timezone: Europe/London # (optional) ensure all time comparisons are done in this TZ
    rules:
