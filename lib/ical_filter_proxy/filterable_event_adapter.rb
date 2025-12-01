@@ -44,6 +44,11 @@ module IcalFilterProxy
       @end_components ||= DateComponents.new(dtend, options[:timezone])
     end
 
+    # extract and rename TRANSP field to something more obvious
+    def blocking
+      raw_event.transp == 'OPAQUE' || raw_event.transp.nil?
+    end
+
     def method_missing(method_sym, *args, &block)
       if method_sym.to_s =~ /(start|end)\_(\w+)/
         components = self.send("#{$1}_components")

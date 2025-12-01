@@ -87,4 +87,24 @@ RSpec.describe IcalFilterProxy::FilterableEventAdapter do
       expect(adapter.end_date).to eq('2017-06-30')
     end
   end
+
+  describe '#blocking' do
+    it 'returns true if transp is OPAQUE' do
+      test_event.transp = 'OPAQUE'
+      adapter = described_class.new(test_event)
+      expect(adapter.blocking).to be true
+    end
+
+    it 'returns false if transp is TRANSPARENT' do
+      test_event.transp = 'TRANSPARENT'
+      adapter = described_class.new(test_event)
+      expect(adapter.blocking).to be false
+    end
+
+    it 'returns true if transp is nil (default)' do
+      test_event.transp = nil
+      adapter = described_class.new(test_event)
+      expect(adapter.blocking).to be true
+    end
+  end
 end

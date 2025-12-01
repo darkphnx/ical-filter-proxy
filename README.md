@@ -30,8 +30,11 @@ my_calendar_name:
         operator: matches # match against regex pattern
         val: # array of values also supported
           - '/Team A/i'
+      - field: blocking # blocking (TRANSP) field supported
+        operator: equals
+        val: true # true will filter out non-blocking events
    alarms: # (optional) create/clear alarms for filtered events
-     clear_existing: true # (optional) if true, existing alarms will be removed, default: false 
+     clear_existing: true # (optional) if true, existing alarms will be removed, default: false
      triggers: # (optional) triggers for new alarms. Description will be the alarm summary, action is 'DISPLAY'
        - '-P1DT0H0M0S' # iso8601 supported
        - 2 days # supports full day[s], hour[s], minute[s], no combination in one trigger
@@ -39,10 +42,10 @@ my_calendar_name:
 
 ### Variable substitution
 
-It might be useful to inject configuration values as environment variable.  
-Variables are substituted if they begin with `ICAL_FILTER_PROXY_<value>` and are defined in the configuration like `${ICAL_FILTER_PROXY_<value>}`.  
+It might be useful to inject configuration values as environment variable.
+Variables are substituted if they begin with `ICAL_FILTER_PROXY_<value>` and are defined in the configuration like `${ICAL_FILTER_PROXY_<value>}`.
 
-Example: 
+Example:
 ```yaml
   api_key: ${ICAL_FILTER_PROXY_API_KEY}
 ```
