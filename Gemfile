@@ -5,6 +5,7 @@ gem 'icalendar'
 gem 'rake'
 gem 'rack', require: false
 gem 'rackup', require: false
+gem 'puma', require: false
 
 gem 'rspec', require: false
 gem 'rspec_junit_formatter', require: false
