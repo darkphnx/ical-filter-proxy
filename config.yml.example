@@ -5,6 +5,9 @@ rota:
     - field: start_time
       operator: equals
       val: '09:00'
+    - field: blocking
+      operator: equals
+      val: true
   alarms:
     clear_existing: true
     triggers:

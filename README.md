@@ -29,6 +29,9 @@ my_calendar_name:
         operator: matches # match against regex pattern
         val: # array of values also supported
           - '/Team A/i'
+      - field: blocking # blocking (TRANSP) field supported
+        operator: equals
+        val: true # true will filter out non-blocking events
    alarms: # (optional) create/clear alarms for filtered events
      clear_existing: true # (optional) if true, existing alarms will be removed, default: false
      triggers: # (optional) triggers for new alarms. Description will be the alarm summary, action is 'DISPLAY'
