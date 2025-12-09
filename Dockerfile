@@ -1,4 +1,4 @@
-FROM ruby:2.7-alpine AS base
+FROM ruby:3.4-alpine AS base
 RUN apk add --update tzdata
 
 FROM base AS dependencies
