@@ -1,12 +1,12 @@
 version: 2.1
 orbs:
-  ruby: circleci/ruby@2.0.0
-  docker: circleci/docker@2.2.0
+  ruby: circleci/ruby@2.6.0
+  docker: circleci/docker@3.0.1
 
 jobs:
   test:
     docker:
-      - image: cimg/ruby:2.7
+      - image: cimg/ruby:3.4
 
     steps:
       - checkout
@@ -36,9 +36,9 @@ jobs:
       - run:
           name: Login to Dockerhub
           command: echo "${DOCKER_PASSWORD}" | docker login --username "${DOCKER_LOGIN}" --password-stdin
-      - run: 
+      - run:
           name: Cross-Build Image
-          command: | 
+          command: |
             docker buildx build --push \
               --platform linux/arm64,linux/amd64 \
               --tag darkphnx/ical-filter-proxy:latest .
