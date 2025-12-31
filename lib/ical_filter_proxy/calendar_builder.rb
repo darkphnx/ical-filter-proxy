@@ -20,7 +20,8 @@ module IcalFilterProxy
     def create_calendar
       @calendar = Calendar.new(calendar_config["ical_url"],
                                calendar_config["api_key"],
-                               calendar_config["timezone"])
+                               calendar_config["timezone"],
+                               calendar_config["request_headers"])
     end
 
     def add_rules
